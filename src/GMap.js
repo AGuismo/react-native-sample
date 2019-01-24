@@ -64,7 +64,7 @@ export default class GMap extends Component {
       <Container>
         <Header style={styles.header}>
           <Body>
-            <Title>GMap: Bang Sue Restaurant</Title>
+            <Title>GMap: Bang Sue Restaurants</Title>
           </Body>
         </Header>
           <MapView
