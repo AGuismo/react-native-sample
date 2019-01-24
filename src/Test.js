@@ -72,7 +72,7 @@ export default class Test extends React.Component {
                 maxLength={8}
                 onChangeText={(value) => this.setState({ termNumber: value.replace(/[^0-9]/g, ''), result: '' })}
                 onEndEditing={this.onFindPress}
-                onFocus={()=> this.setState({ termNumber: '' })}
+                onFocus={()=> this.setState({ termNumber: '', result: '' })}
               />
             </Item>
             <Button
