@@ -27,7 +27,7 @@ export default class GMap extends Component {
   }
 
   fetchPlacesData = () => {
-    fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${GOOGLE_PLACES_API_KEY}&types=restaurant&location=13.819792,100.528361&radius=2600`)
+    fetch(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${GOOGLE_PLACES_API_KEY}&types=restaurant&location=13.7489745,100.53805&radius=20000`)
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({ 
@@ -64,16 +64,16 @@ export default class GMap extends Component {
       <Container>
         <Header style={styles.header}>
           <Body>
-            <Title>GMap: Bang Sue Restaurants</Title>
+            <Title>GMap: Bangkok Restaurants</Title>
           </Body>
         </Header>
           <MapView
             style={{ flex: 1 }}
             initialRegion={{
-              latitude: 13.822708,
-              longitude: 100.524454,
-              latitudeDelta: 0.056011,
-              longitudeDelta: 0.043858,
+              latitude: 13.7489745,
+              longitude: 100.53805,
+              latitudeDelta: 0.0960410,
+              longitudeDelta: .145279,
             }}
           >
             {this.renderMarkers()}
@@ -84,7 +84,7 @@ export default class GMap extends Component {
 }
 
 const styles = StyleSheet.create({
-    header: {
-      paddingTop: Platform.OS === 'ios' ? 20 : Constants.statusBarHeight
-    },
-  })
+  header: {
+    paddingTop: Platform.OS === 'ios' ? 20 : Constants.statusBarHeight
+  },
+})
