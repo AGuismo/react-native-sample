@@ -1,7 +1,7 @@
 import React from 'react'
 import { Platform, StyleSheet } from 'react-native'
 import { Constants } from 'expo'
-import { 
+import {
   Container,
   Content,
   Form,
@@ -10,29 +10,33 @@ import {
   Input,
   Text,
   Header,
-  Left,  
+  Left,
   Body,
   Right,
   Button,
-  Title
+  Title,
 } from 'native-base'
 import memoize from 'fast-memoize'
 
-
 // findSequenceTerm find the term value of the sequence X(n) = X(n - 1) + 2(n - 1)
-const findSequenceTerm = (termNumber) => {
+const findSequenceTerm = (termNumber: number) => {
   if (isNaN(termNumber) || termNumber <= 0) return ''
   let currentStep = 0
   let sum = 3
   while (currentStep !== termNumber) {
     sum += 2 * currentStep
-    currentStep++
+    currentStep += 1
   }
   return sum
 }
-  
-export default class Test extends React.Component {
-  constructor(props) {
+
+type State = {
+  termNumber: string,
+  result: string,
+}
+
+export default class Math extends React.Component<{}, State> {
+  constructor(props: any) {
     super(props)
     this.state = {
       termNumber: '',
@@ -41,49 +45,57 @@ export default class Test extends React.Component {
     this.memfindSequenceTerm = memoize(findSequenceTerm)
   }
 
+  memfindSequenceTerm: any
+
   onFindPress = () => {
-    this.setState({ result: this.memfindSequenceTerm(parseInt(this.state.termNumber)) })
+    this.setState({ result: this.memfindSequenceTerm(parseInt(this.state.termNumber, 10)) })
   }
 
-  render(){
+  onChangeText = (text: string) =>  {
+    this.setState({ termNumber: text.replace(/[^0-9]/g, ''), result: '' })
+  }
+
+  renderResult = () => this.state.result ?
+  <Text style={styles.result}>Result: {this.state.result}</Text> : null
+
+  render() {
     return(
       <Container>
-        <Header noLeft style={styles.header}>
+        <Header noLeft={true} style={styles.header}>
           <Left />
           <Body>
             <Title>Math: Sequence</Title>
           </Body>
           <Right />
         </Header>
-        <Content padder>
+        <Content padder={true}>
         <Text style={styles.contentTitle}>{'Find sequence term'}</Text>
         <Text style={styles.contentSubtitle}>{'Sequence notation: { 3, 5, 9, 15, ... }'}</Text>
         <Text style={styles.contentSubtitle}>{'Sequence formula: X(n) = F(n - 1) + 2(n - 1)'}</Text>
           <Form>
             <Item
               style={styles.formInput}
-              regular
+              regular={true}
             >
               <Label>N :</Label>
               <Input
-                ref='find'
-                keyboardType = 'numeric'
+                keyboardType='numeric'
                 value={`${this.state.termNumber}`}
                 maxLength={8}
-                onChangeText={(value) => this.setState({ termNumber: value.replace(/[^0-9]/g, ''), result: '' })}
+                onChangeText={this.onChangeText}
                 onEndEditing={this.onFindPress}
-                onFocus={()=> this.setState({ termNumber: '', result: '' })}
+                onFocus={() => this.setState({ termNumber: '', result: '' })}
               />
             </Item>
             <Button
               style={styles.formButton}
-              full
+              full={true}
               onPress={this.onFindPress}
             >
               <Text>Find</Text>
             </Button>
           </Form>
-          {this.state.result ? <Text style={styles.result}>Result: {this.state.result}</Text> : null}
+          {this.renderResult()}
         </Content>
       </Container>
     )
@@ -97,7 +109,7 @@ const styles = StyleSheet.create({
   contentTitle: {
     marginVertical: 5,
     textAlign: 'center',
-    fontSize: 25
+    fontSize: 25,
   },
   contentSubtitle: {
     marginVertical: 5,
@@ -117,5 +129,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 25,
     fontWeight: 'bold',
-  }
+  },
 })

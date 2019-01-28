@@ -1,12 +1,16 @@
 import React from 'react'
 import { Footer, FooterTab, Button, Icon, Text } from 'native-base'
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation'
+import { createBottomTabNavigator, createAppContainer,
+  NavigationNavigator } from 'react-navigation'
 
 import Math from './Math'
 import GMap from './GMap'
 
+type Props = {
+  navigation: any,
+}
 
-class NavFooter extends React.Component {
+class NavFooter extends React.Component<Props> {
   getActiveRouteName = () => {
     return this.props.navigation.state.routes[this.props.navigation.state.index].routeName
   }
@@ -26,7 +30,7 @@ class NavFooter extends React.Component {
             active={this.getActiveRouteName() === 'GMap'}
             onPress={() => this.props.navigation.navigate('GMap')}
           >
-            <Icon name="navigate" />
+            <Icon name='navigate' />
             <Text>GMap</Text>
           </Button>
         </FooterTab>
@@ -38,7 +42,7 @@ class NavFooter extends React.Component {
 const AppNav = createBottomTabNavigator({
   Math,
   GMap,
-},{
+},                                      {
   tabBarComponent: NavFooter,
   tabBarPosition: 'bottom',
 })
