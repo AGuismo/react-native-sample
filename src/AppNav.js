@@ -2,7 +2,7 @@ import React from 'react'
 import { Footer, FooterTab, Button, Icon, Text } from 'native-base'
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation'
 
-import Test from './Test'
+import Math from './Math'
 import GMap from './GMap'
 
 
@@ -16,11 +16,11 @@ class NavFooter extends React.Component {
       <Footer>
         <FooterTab>
           <Button
-            active={this.getActiveRouteName() === 'Test'}
-            onPress={() => this.props.navigation.navigate('Test')}
+            active={this.getActiveRouteName() === 'Math'}
+            onPress={() => this.props.navigation.navigate('Math')}
           >
             <Icon name='apps' />
-            <Text>Test</Text>
+            <Text>Math</Text>
           </Button>
           <Button
             active={this.getActiveRouteName() === 'GMap'}
@@ -36,7 +36,7 @@ class NavFooter extends React.Component {
 }
 
 const AppNav = createBottomTabNavigator({
-  Test,
+  Math,
   GMap,
 },{
   tabBarComponent: NavFooter,

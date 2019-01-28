@@ -51,7 +51,7 @@ export default class Test extends React.Component {
         <Header noLeft style={styles.header}>
           <Left />
           <Body>
-            <Title>Test</Title>
+            <Title>Math: Sequence</Title>
           </Body>
           <Right />
         </Header>
