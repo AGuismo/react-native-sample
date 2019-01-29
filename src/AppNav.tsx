@@ -6,11 +6,7 @@ import { createBottomTabNavigator, createAppContainer,
 import Math from './Math'
 import GMap from './GMap'
 
-type Props = {
-  navigation: any,
-}
-
-class NavFooter extends React.Component<Props> {
+class NavFooter extends React.Component<{navigation: any}> {
   getActiveRouteName = () => {
     return this.props.navigation.state.routes[this.props.navigation.state.index].routeName
   }
