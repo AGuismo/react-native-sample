@@ -1,12 +1,8 @@
 import React from 'react'
-import { Platform, StyleSheet } from 'react-native'
-import { Constants, MapView } from 'expo'
-import {
-  Container,
-  Header,
-  Body,
-  Title,
-} from 'native-base'
+import { MapView } from 'expo'
+import { Container, Text } from 'native-base'
+
+import PageHeader from './ui-kit/PageHeader'
 
 const GOOGLE_PLACES_API_KEY = 'paste-your-key-here'
 
@@ -81,29 +77,19 @@ export default class GMap extends React.Component<{}, State> {
   render() {
     return(
       <Container>
-        <Header style={styles.header}>
-          <Body>
-            <Title>GMap: Bangkok Restaurants</Title>
-          </Body>
-        </Header>
-          <MapView
-            style={{ flex: 1 }}
-            initialRegion={{
-              latitude: 13.7489745,
-              longitude: 100.53805,
-              latitudeDelta: 0.0960410,
-              longitudeDelta: .145279,
-            }}
-          >
-            {this.renderMarkers()}
-          </MapView>
+        <PageHeader title='Bangkok Restaurants'/>
+        <MapView
+          style={{ flex: 1 }}
+          initialRegion={{
+            latitude: 13.7489745,
+            longitude: 100.53805,
+            latitudeDelta: 0.0960410,
+            longitudeDelta: 0.145279,
+          }}
+        >
+          {this.renderMarkers()}
+        </MapView>
       </Container>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  header: {
-    paddingTop: Platform.OS === 'ios' ? 20 : Constants.statusBarHeight,
-  },
-})

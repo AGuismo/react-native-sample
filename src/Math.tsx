@@ -1,6 +1,5 @@
 import React from 'react'
-import { Platform, StyleSheet } from 'react-native'
-import { Constants } from 'expo'
+import { StyleSheet } from 'react-native'
 import {
   Container,
   Content,
@@ -9,14 +8,11 @@ import {
   Label,
   Input,
   Text,
-  Header,
-  Left,
-  Body,
-  Right,
   Button,
-  Title,
 } from 'native-base'
 import memoize from 'fast-memoize'
+
+import PageHeader from './ui-kit/PageHeader'
 
 // findSequenceTerm find the term value of the sequence X(n) = X(n - 1) + 2(n - 1)
 const findSequenceTerm = (termNumber: number) => {
@@ -61,13 +57,7 @@ export default class Math extends React.Component<{}, State> {
   render() {
     return(
       <Container>
-        <Header noLeft={true} style={styles.header}>
-          <Left />
-          <Body>
-            <Title>Math: Sequence</Title>
-          </Body>
-          <Right />
-        </Header>
+        <PageHeader title='Sequence'/>
         <Content padder={true}>
         <Text style={styles.contentTitle}>{'Find sequence term'}</Text>
         <Text style={styles.contentSubtitle}>{'Sequence notation: { 3, 5, 9, 15, ... }'}</Text>
@@ -103,9 +93,6 @@ export default class Math extends React.Component<{}, State> {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    paddingTop: Platform.OS === 'ios' ? 20 : Constants.statusBarHeight,
-  },
   contentTitle: {
     marginVertical: 5,
     textAlign: 'center',
