@@ -15,7 +15,7 @@ import memoize from 'fast-memoize'
 import PageHeader from './ui-kit/PageHeader'
 
 // findSequenceTerm find the term value of the sequence X(n) = X(n - 1) + 2(n - 1)
-const findSequenceTerm = (termNumber: number) => {
+export const findSequenceTerm = (termNumber: number) => {
   if (isNaN(termNumber) || termNumber <= 0) return ''
   let currentStep = 0
   let sum = 3
